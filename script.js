@@ -9,6 +9,8 @@ function calcularIMC() {
     }
     const imc = peso / (altura * altura);
     let classificacao = "";
+    let pesoIdeal = 22 * (altura * altura);
+    let mensagemPesoIdeal = "";
 
     if (imc < 18.5) {
         classificacao = "Abaixo do peso";
@@ -24,5 +26,14 @@ function calcularIMC() {
         classificacao = "Obesidade grau 3";
     }    
     
-    resultado.textContent = `Seu IMC é ${imc.toFixed(2)} (${classificacao})`;
+    if (peso > pesoIdeal) {
+        const perder = (peso - pesoIdeal).toFixed(1);
+        mensagemPesoIdeal = `Para alcançar seu peso ideal, voce pode perder cerca de ${perder} kg.`;
+    }   else if (peso < pesoIdeal) {
+        const ganhar = (peso - pesoIdeal).toFixed(1);
+        mensagemPesoIdeal = `Para alcançar seu peso ideal, voce pode ganhar cerca de ${ganhar} kg.`;
+    }   else {
+        mensagemPesoIdeal = `Voce está com o peso ideal, mantenha assim!`
+    }
+    resultado.innerHTML = `Seu IMC é <strong>${imc.toFixed(2)}</strong> (${classificacao}).<br>${mensagemPesoIdeal}`;
 }
